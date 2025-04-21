@@ -6,7 +6,7 @@
 
 [![Project page](https://img.shields.io/badge/Project-page-blue.svg)](https://brainvivodev.github.io/openbrain-brainvivo/)
 [![license](https://img.shields.io/badge/license-Apache2.0--CommonsClause-green?logo=style)](https://github.com/BrainVivoDev/OpenBrain/blob/main/LICENSE.txt)
-![Python 3.10](https://img.shields.io/badge/Python-3.10.13-blue.svg)
+![Python 3.10](https://img.shields.io/badge/Python-3.10-blue.svg)
 [![Twitter Follow](https://img.shields.io/twitter/follow/Brainvivio?style=social)](https://twitter.com/Brainvivo)
 [![Join Discord](https://img.shields.io/badge/Join-Discord-7289DA?logo=discord&logoColor=white)](https://discord.gg/QfX4PS79)
 
