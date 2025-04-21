@@ -20,7 +20,7 @@ Open-Brain is trained on functional MRI data to predict the neural activation pa
 
 - Emotional Transformation: Modify an image’s emotional tone by adjusting activations in specific brain regions (see the Brain Embedding Explorer below).
 
-- Video Characterization: Evaluate video content by analyzing the emotions it provokes (see the Perceptor tool below).
+- Video and Image Characterization: Evaluate media content by analyzing the emotions it provokes (see the Perceptor tool below).
 
 
 # Brain Embedding Explorer
@@ -89,7 +89,7 @@ For example: `export OASIS_IMAGE_DIR="./oasis/Images"`
 Please note: the OASIS dataset contains highly graphic imagery. Viewer discretion is advised.
 
 # Usage:
-The repository includes two models. One predicts the brain response using Meta's Imagebind as image embedding and the the other from Open CLIP image embedding. Both models are hosted on Huggingface. 
+The repository includes two models. One predicts the brain response using Meta's Imagebind as image embedding and the other from Open CLIP image embedding. Both models are hosted on Huggingface. 
 
 ## Download the models from Huggingface
 ```{shell}
