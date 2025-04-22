@@ -21,7 +21,6 @@ BRAIN_EMBEDDING_MAT = project_dir / "brain_embedding_model" / "imagebind_embeddi
 TRAINSET_EMBEDDINGS_PATH = project_dir / "brain_embedding_explorer" / "resources" / "full_trainset_imagebind_embeddings.csv"
 PARCELS_MAP_PATH = project_dir / "brain_embedding_explorer" / "resources" / "parcels_seg_Schaefer2018_200Parcels_Kong2022_17Networks_order.nii"
 PERCEPTION_ATLAS_PATH = project_dir / "brain_embedding_explorer" / "resources" / "Perception_atlas.csv"
-LANCEDB_TBL = "oasis_1024embeddings_5"
 
 
 def activated_parcels(imagebind_image_embedding, image_name: str, space="1024") -> tuple[dict[str, str], pd.DataFrame]:
