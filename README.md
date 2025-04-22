@@ -82,7 +82,7 @@ This step is optional (the OASIS dataset is required for the Brain Embedding Exp
     2. Set the environment variable
 
 ```{shell}
-export DB_IMAGE_DIR=<images folder path>`
+export DB_IMAGE_DIR=<images folder path>
 ```
 For example: `export DB_IMAGE_DIR=./oasis/Images`
 
