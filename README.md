@@ -25,7 +25,7 @@ Open-Brain is trained on functional MRI data to predict the neural activation pa
 
 # Brain Embedding Explorer
 
-The Brain Embedding Explorer app allows you to freely explore how images map onto brain embeddings. To get started, choose a LanceDB table (the default uses the OASIS dataset, as shown in the first screenshot). Next, upload an image and transform the emotion portrayed in the image by using the emotions slider, then click the “Modify Emotion” button. This transforms the brain embedding accordingly and displays five images from the OASIS dataset that share the most similar brain embedding (see second screenshot). Finally, delve deeper into the brain response by viewing which regions are most responsive and learning about their cognitive roles in perception (see third screenshot). These results can also be downloaded as a CSV file for further analysis.
+The Brain Embedding Explorer app allows you to freely explore how images map onto brain embeddings. To get started, choose a LanceDB table (the default uses the OASIS dataset, as shown in the first screenshot, although creating a new LanceDB is available via script, see below). Next, upload an image and transform the emotion portrayed in the image by using the emotions slider, then click the “Modify Emotion” button. This transforms the brain embedding accordingly and displays five images from the OASIS dataset that share the most similar brain embedding (see second screenshot). Finally, delve deeper into the brain response by viewing which regions are most responsive and learning about their cognitive roles in perception (see third screenshot). These results can also be downloaded as a CSV file for further analysis.
 
 <table>
   <tr>
@@ -82,9 +82,9 @@ This step is optional (the OASIS dataset is required for the Brain Embedding Exp
     2. Set the environment variable
 
 ```{shell}
-export OASIS_IMAGE_DIR=<OASIS Images folder path>`
+export DB_IMAGE_DIR=<images folder path>`
 ```
-For example: `export OASIS_IMAGE_DIR="./oasis/Images"`
+For example: `export DB_IMAGE_DIR=./oasis/Images`
 
 Please note: the OASIS dataset contains highly graphic imagery. Viewer discretion is advised.
 
@@ -129,6 +129,26 @@ data = calc_brain_embedding(
         image_emb, brain_model_file=BRAIN_EMBEDDING_MAT
 )
 ```
+# Using your own set of images (with the Brain Embedding Explorer)
+Instead of using the provided OASIS database, you can create a new lancedb table based on a set of images of your choice, and explore how your images map onto brain embeddings space.
+
+To do so, first build the lancedb table using
+```{shell}
+python ./brain_embedding_explorer/create_images_db.py <path to your images folder> <new db name>
+```
+For example `python ./brain_embedding_explorer/create_images_db.py ~/Downloads/project_images my_new_db`
+
+Please note that the provided folder should include at least 256 images.
+
+After this new db is done, to use it, make sure to re-run `export DB_IMAGE_DIR=<images folder path>` with the new folder containing the relevant images
+
+Then, when running the app with 
+```{shell}
+streamlit run ./brain_embedding_explorer/app.py
+```
+Please write the name of your new db under *"Enter table name"* before clicking *Connect to DB*
+
+
 
 # Examples notebook
 
