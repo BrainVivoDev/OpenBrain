@@ -25,7 +25,7 @@ project_dir = Path(__file__).resolve().parent.parent
 st.session_state.brain_embedding_mat = (
     project_dir / "brain_embedding_model" / "imagebind_embedding_model.safetensors"
 )
-st.session_state.tbl = "oasis_1024embeddings_5"
+st.session_state.tbl = "OASIS"
 st.session_state.lance_db_path = (
     project_dir / "brain_embedding_explorer" / "resources" / "lancedb_data"
 )
@@ -197,11 +197,8 @@ if st.button("Modify emotion"):
             st.write("### Images with modified valence:")
             cols = st.columns(st.session_state.k)
             for idx, row in results_df.iterrows():
-                img_path = row.get("image_path").replace(
-                    "/Users/jasminebv/OASIS_database_2016/images",
-                    os.getenv("OASIS_IMAGE_DIR"),
-                )
-                if img_path and os.path.exists(img_path):
+                img_path = os.getenv("OASIS_IMAGE_DIR")+ "/" + row.get("image_path")
+                if os.path.exists(img_path):
                     img = Image.open(img_path)
                     cols[idx % st.session_state.k].image(
                         img, caption=row["filename"], use_container_width=True
