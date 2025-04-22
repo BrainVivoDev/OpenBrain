@@ -33,11 +33,11 @@ st.session_state.k = 5
 st.session_state.valence = (
     project_dir / "brain_embedding_explorer" / "resources" / "diff_embedding.csv"
 )
-st.session_state.images_path = os.getenv("OASIS_IMAGE_DIR")
+st.session_state.images_path = os.getenv("DB_IMAGE_DIR")
 
-if os.getenv("OASIS_IMAGE_DIR") is None:
+if os.getenv("DB_IMAGE_DIR") is None:
     st.error(
-        "Please set the OASIS_IMAGE_DIR environment variable to the path of the images. See README file for more details."
+        "Please set the DB_IMAGE_DIR environment variable to the path of the images. See README file for more details."
     )
 
 
@@ -197,7 +197,7 @@ if st.button("Modify emotion"):
             st.write("### Images with modified valence:")
             cols = st.columns(st.session_state.k)
             for idx, row in results_df.iterrows():
-                img_path = os.getenv("OASIS_IMAGE_DIR")+ "/" + row.get("image_path")
+                img_path = os.getenv("DB_IMAGE_DIR")+ "/" + row.get("image_path")
                 if os.path.exists(img_path):
                     img = Image.open(img_path)
                     cols[idx % st.session_state.k].image(
@@ -206,7 +206,7 @@ if st.button("Modify emotion"):
                 else:
                     cols[idx % st.session_state.k].write(row["filename"])
                     st.error(
-                        f"Image not found at path: {img_path}. Please export oasis/Images as instructed. See README file for more details."
+                        f"Image not found at path: {img_path}. Please export path to images as instructed. See README file for more details."
                     )
         except Exception as e:
             st.error(f"Error during valence modification: {e}")
