@@ -77,7 +77,7 @@ pip install -r requirements.txt
 3. (Optional) Download the OASIS image dataset dataset  
 This step is optional (the OASIS dataset is required for the Brain Embedding Explorer tool).
 
-    1. Download [Oasis](https://www.benedekkurdi.com/#oasis)
+    1. Download [OASIS](https://www.benedekkurdi.com/#oasis)
 
     2. Set the environment variable
 
