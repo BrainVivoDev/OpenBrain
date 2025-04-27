@@ -18,14 +18,14 @@ Open-Brain is trained on functional MRI data to predict the neural activation pa
 
 - Emotion-Based Image Clustering: Cluster images according to the emotional responses they elicit (see the t‑SNE example in `open_brain_examples.ipynb`).
 
-- Emotional Transformation: Modify an image’s emotional tone by adjusting activations in specific brain regions (see the Brain Embedding Explorer below).
+- Emotional Transformation: Modify an image’s emotional tone by adjusting activations in specific brain regions (see the *BrainTwins Embedding Explorer* below).
 
 - Video and Image Characterization: Evaluate media content by analyzing the emotions it provokes (see the Perceptor tool below).
 
 
-# Brain Embedding Explorer
+# BrainTwins Embedding Explorer
 
-The Brain Embedding Explorer app allows you to freely explore how images map onto brain embeddings. To get started, choose a LanceDB table (the default uses the OASIS dataset, as shown in the first screenshot, although creating a new LanceDB is available via script, see below). Next, upload an image and transform the emotion portrayed in the image by using the emotions slider, then click the “Modify Emotion” button. This transforms the brain embedding accordingly and displays five images from the OASIS dataset that share the most similar brain embedding (see second screenshot). Finally, delve deeper into the brain response by viewing which regions are most responsive and learning about their cognitive roles in perception (see third screenshot). These results can also be downloaded as a CSV file for further analysis.
+The BrainTwins Embedding Explorer app allows you to freely explore how images map onto brain embeddings. To get started, choose a LanceDB table (the default uses the OASIS dataset, as shown in the first screenshot, although creating a new LanceDB is available via script, see below). Next, upload an image and transform the emotion portrayed in the image by using the emotions slider, then click the “Modify Emotion” button. This transforms the brain embedding accordingly and displays five images from the OASIS dataset that share the most similar brain embedding (see second screenshot). Finally, delve deeper into the brain response by viewing which regions are most responsive and learning about their cognitive roles in perception (see third screenshot). These results can also be downloaded as a CSV file for further analysis.
 
 <table>
   <tr>
@@ -37,7 +37,7 @@ The Brain Embedding Explorer app allows you to freely explore how images map ont
 
 You can use the online tool [here](https://embedding-explorer.brainvivo.com) or install the library (see instructions below) and then execute:
 ```{shell}
-streamlit run ./brain_embedding_explorer/app.py
+streamlit run ./brainTwins_embedding_explorer/app.py
 ```
 
 # Perceptor
@@ -75,7 +75,7 @@ pip install -r requirements.txt
 ```
 
 3. (Optional) Download the OASIS image dataset dataset  
-This step is optional (the OASIS dataset is required for the Brain Embedding Explorer tool).
+This step is optional (the OASIS dataset is required for the BrainTwins Embedding Explorer tool, although using a different image set is enabled, see *Using your own set of images* section below).
 
     1. Download [OASIS](https://www.benedekkurdi.com/#oasis)
 
@@ -129,14 +129,14 @@ data = calc_brain_embedding(
         image_emb, brain_model_file=BRAIN_EMBEDDING_MAT
 )
 ```
-# Using your own set of images (with the Brain Embedding Explorer)
+# Using your own set of images (with the BrainTwins Embedding Explorer)
 Instead of using the provided OASIS database, you can create a new lancedb table based on a set of images of your choice, and explore how your images map onto brain embeddings space.
 
 To do so, first build the lancedb table using
 ```{shell}
-python ./brain_embedding_explorer/create_images_db.py <path to your images folder> <new db name>
+python ./brainTwins_embedding_explorer/create_images_db.py <path to your images folder> <new db name>
 ```
-For example `python ./brain_embedding_explorer/create_images_db.py ~/Downloads/project_images my_new_db`
+For example `python ./brainTwins_embedding_explorer/create_images_db.py ~/Downloads/project_images my_new_db`
 
 Please note that the provided folder should include at least 256 images.
 
@@ -144,7 +144,7 @@ After this new db is done, to use it, make sure to re-run `export DB_IMAGE_DIR=<
 
 Then, when running the app with 
 ```{shell}
-streamlit run ./brain_embedding_explorer/app.py
+streamlit run ./brainTwins_embedding_explorer/app.py
 ```
 Please write the name of your new db under *"Enter table name"* before clicking *Connect to DB*
 
