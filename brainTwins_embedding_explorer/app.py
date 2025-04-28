@@ -9,7 +9,7 @@ from pathlib import Path
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from image_embedding_model.imagebind_embedding import img2imagebind
+from image_embedding_model.imagebind_embedding import img2imagebind, ImagebindSingleton
 from brain_embedding_model.brain_embedding import calc_brain_embedding
 
 from PIL import Image
@@ -27,11 +27,11 @@ st.session_state.brain_embedding_mat = (
 )
 st.session_state.tbl = "OASIS"
 st.session_state.lance_db_path = (
-    project_dir / "brain_embedding_explorer" / "resources" / "lancedb_data"
+    project_dir / "brainTwins_embedding_explorer" / "resources" / "lancedb_data"
 )
 st.session_state.k = 5
 st.session_state.valence = (
-    project_dir / "brain_embedding_explorer" / "resources" / "diff_embedding.csv"
+    project_dir / "brainTwins_embedding_explorer" / "resources" / "diff_embedding.csv"
 )
 st.session_state.images_path = os.getenv("DB_IMAGE_DIR")
 
@@ -41,12 +41,36 @@ if os.getenv("DB_IMAGE_DIR") is None:
     )
 
 
+loading_placeholder = st.empty()
+checkpoints_ready = os.path.exists(project_dir / ".checkpoints") and os.path.exists(
+    project_dir / ".checkpoints" / "imagebind_huge.pth")
+with loading_placeholder.container():
+    st.image("brainTwins_embedding_explorer/resources/brainvivo_logo.gif")
+    if not checkpoints_ready:
+        # Show a loading message if .checkpoints files are not found and need to be downloaded
+        st.markdown("Downloading image embedding model. This might take a few minutes...")
+    else:
+        # Load imagebind singleton upon loading  the app to minimize image processing time
+        st.markdown("Loading, please wait...")
+
+@st.cache_resource(show_spinner=False)
+def load_imagebind():
+    # Simulate slow load (remove in real usage)
+    imagebind_singleton = ImagebindSingleton(device="cpu")
+    return imagebind_singleton
+
+singleton = load_imagebind()
+
+loading_placeholder.empty()
+
+
 # -----------------------------
 # Streamlit App
 logo_path = project_dir / "graphics" / "OB-Logo.svg"
 # st.image(str(logo_path.resolve()), use_container_width=False)
 st.image(logo_path, use_container_width=False)
-st.title("Brain Embedding Explorer")
+st.title("BrainTwins Embedding Explorer")
+
 
 # Initialize keys in session state if they don't exist
 if "image_brain_embedding" not in st.session_state:

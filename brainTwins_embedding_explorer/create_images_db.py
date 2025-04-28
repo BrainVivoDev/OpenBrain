@@ -1,6 +1,5 @@
 from pathlib import Path
 import lancedb
-from tqdm import tqdm
 import sys
 import os
 import argparse
@@ -12,7 +11,7 @@ from brain_embedding_model.brain_embedding import calc_brain_embedding
 # Paths to resources
 project_dir = Path(__file__).resolve().parent.parent
 BRAIN_EMBEDDING_MAT = project_dir / "brain_embedding_model" / "imagebind_embedding_model.safetensors"
-LANCE_DB_PATH = project_dir / "brain_embedding_explorer" / "resources" / "lancedb_data"
+LANCE_DB_PATH = project_dir / "brainTwins_embedding_explorer" / "resources" / "lancedb_data"
 
 
 def create_lancedb_table(images_folder_path:str, table_name:str, lancedb_data_path:str) -> str:
