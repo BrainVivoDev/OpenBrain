@@ -14,6 +14,11 @@
 Open-Brain is trained on functional MRI data to predict the neural activation patterns that images elicit across 1,024 distinct brain regions. These predicted responses serve as image embeddings, sensitively encoding the emotional reactions each image evokes within a specific cohort. For more information please refer to the [project page](https://brainvivodev.github.io/openbrain-brainvivo/).
 
 
+# News 🚀🚀🚀
+- [2025-04-29] For you convenience, a transformation table mapping known emotions to the VA space is now available at brain_embedding_model/va_transformation_table.csv
+- [2025-04-27] The BrainTwins Embedding Explorer now supports creating new LanceDB tables based on your custom set of images. For more information see '*Using your own set of images*' section below.
+
+
 # Use-cases
 
 - Emotion-Based Image Clustering: Cluster images according to the emotional responses they elicit (see the t‑SNE example in `open_brain_examples.ipynb`).
