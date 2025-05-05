@@ -98,9 +98,10 @@ def predict_emotion(in_image_path):
     )[0]
 
     emotion = get_closest_emotion(valence_pred, arousal_pred, conversion_table)
-    print(f"Emotion: {emotion}, Valence:{valence_pred}, Arousal:{arousal_pred}")
     return emotion, valence_pred, arousal_pred
 
 
-in_image_path = "/Users/shlomilifshits/Documents/OpenBrain/oasis/Images/Shark 2.jpg"
-predict_emotion(in_image_path)
+def call_example():
+    in_image_path = "./examples/sample_OASIS_images/Beach 1.jpg"
+    emotion, valence_pred, arousal_pred = predict_emotion(in_image_path)
+    print(f"Emotion: {emotion}, Valence:{valence_pred}, Arousal:{arousal_pred}")
