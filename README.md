@@ -17,6 +17,7 @@ Open-Brain is trained on functional MRI data to predict the neural activation pa
 # News 🚀🚀🚀
 - [2025-04-29] For you convenience, a transformation table mapping known emotions to the VA space is now available at brain_embedding_model/va_transformation_table.csv
 - [2025-04-27] The BrainTwins Embedding Explorer now supports creating new LanceDB tables based on your custom set of images. For more information see '*Using your own set of images*' section below.
+- [2025-05-06] By executing the notebook `open_brain_examples.ipynb` valence and arousal regression models are trained and saved. The models can be used for emotion prediction by calling the function `predict_emotion` in `emotion_prediction.py`. 
 
 
 # Use-cases
