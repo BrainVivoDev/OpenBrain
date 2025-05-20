@@ -15,7 +15,8 @@ Open-Brain is trained on functional MRI data to predict the neural activation pa
 
 
 # News 🚀🚀🚀
-- [2025-05-07] BrainTwins Embedding Explorer now integrates the publicly available Unsplash database, giving projects access to an expanded repository of high-quality images. Users can now retrieve output images from Unsplash based on the modified BrainTwins embedding of the uploaded input image. For more info and guidelines, see *Alternative Image Databases* section below.
+- [2025-05-20] BrainTwins Embedding Explorer now integrates the publicly available Unsplash database, giving projects access to an expanded repository of high-quality images. Users can now retrieve output images from Unsplash based on the modified BrainTwins embedding of the uploaded input image. For more info and guidelines, see *Alternative Image Databases* section below.
+- [2025-05-15] Bug fix in `emotion_prediction.py`: scaling of valence and arousal prediction values was added to match the values in `va_transformation_table`.
 - [2025-05-06] By executing the notebook `open_brain_examples.ipynb` valence and arousal regression models are trained and saved. The models can be used for emotion prediction by calling the function `predict_emotion` in `emotion_prediction.py`. 
 - [2025-04-29] For you convenience, a transformation table mapping known emotions to the VA space is now available at brain_embedding_model/va_transformation_table.csv
 - [2025-04-27] BrainTwins Embedding Explorer now supports creating new LanceDB tables based on your custom set of images. For more information see '*Using your own set of images*' section below.
