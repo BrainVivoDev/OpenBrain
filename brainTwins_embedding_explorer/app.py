@@ -35,11 +35,6 @@ st.session_state.valence = (
 )
 st.session_state.images_path = os.getenv("DB_IMAGE_DIR")
 
-if os.getenv("DB_IMAGE_DIR") is None:
-    st.error(
-        "Please set the DB_IMAGE_DIR environment variable to the path of the images. See README file for more details."
-    )
-
 
 loading_placeholder = st.empty()
 checkpoints_ready = os.path.exists(project_dir / ".checkpoints") and os.path.exists(
@@ -92,15 +87,20 @@ table_name = st.text_input("Enter table name:", value=st.session_state.tbl)
 top_terms = None
 
 if st.button("Connect to DB"):
-    try:
-        db = lancedb.connect(db_dir)
-        table = db.open_table(table_name)
-        st.session_state.db = db
-        st.session_state.table = table
-        st.success(f"Connected! Table '{table_name}' opened.")
+    if table_name != "unsplash" and os.getenv("DB_IMAGE_DIR") is None:
+        st.error(
+            "Please set the DB_IMAGE_DIR environment variable to the path of the images. See README file for more details."
+        )
+    else:
+        try:
+            db = lancedb.connect(db_dir)
+            table = db.open_table(table_name)
+            st.session_state.db = db
+            st.session_state.table = table
+            st.success(f"Connected! Table '{table_name}' opened.")
 
-    except Exception as e:
-        st.error(f"Error connecting to DB: {e}")
+        except Exception as e:
+            st.error(f"Error connecting to DB: {e}")
 
 # PART 2: Query via perturbation of a selected image
 st.header("2. Modify the emotion induced by an image")
@@ -221,17 +221,23 @@ if st.button("Modify emotion"):
             st.write("### Images with modified valence:")
             cols = st.columns(st.session_state.k)
             for idx, row in results_df.iterrows():
-                img_path = os.getenv("DB_IMAGE_DIR")+ "/" + row.get("image_path")
-                if os.path.exists(img_path):
-                    img = Image.open(img_path)
+                if table_name == "unsplash":
+                    url = row.get("filename")
                     cols[idx % st.session_state.k].image(
-                        img, caption=row["filename"], use_container_width=True
-                    )
+                            url, caption=row.get("filename"), use_container_width=True
+                        )
                 else:
-                    cols[idx % st.session_state.k].write(row["filename"])
-                    st.error(
-                        f"Image not found at path: {img_path}. Please export path to images as instructed. See README file for more details."
-                    )
+                    img_path = os.getenv("DB_IMAGE_DIR")+ "/" + row.get("image_path")
+                    if os.path.exists(img_path):
+                        img = Image.open(img_path)
+                        cols[idx % st.session_state.k].image(
+                            img, caption=row["filename"], use_container_width=True
+                        )
+                    else:
+                        cols[idx % st.session_state.k].write(row["filename"])
+                        st.error(
+                            f"Image not found at path: {img_path}. Please export path to images as instructed. See README file for more details."
+                        )
         except Exception as e:
             st.error(f"Error during valence modification: {e}")
 

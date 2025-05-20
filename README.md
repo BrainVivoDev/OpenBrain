@@ -15,10 +15,11 @@ Open-Brain is trained on functional MRI data to predict the neural activation pa
 
 
 # News 🚀🚀🚀
+- [2025-05-20] BrainTwins Embedding Explorer now integrates the publicly available Unsplash database, giving projects access to an expanded repository of high-quality images. Users can now retrieve output images from Unsplash based on the modified BrainTwins embedding of the uploaded input image. For more info and guidelines, see *Alternative Image Databases* section below.
 - [2025-05-15] Bug fix in `emotion_prediction.py`: scaling of valence and arousal prediction values was added to match the values in `va_transformation_table`.
 - [2025-05-06] By executing the notebook `open_brain_examples.ipynb` valence and arousal regression models are trained and saved. The models can be used for emotion prediction by calling the function `predict_emotion` in `emotion_prediction.py`. 
 - [2025-04-29] For you convenience, a transformation table mapping known emotions to the VA space is now available at brain_embedding_model/va_transformation_table.csv
-- [2025-04-27] The BrainTwins Embedding Explorer now supports creating new LanceDB tables based on your custom set of images. For more information see '*Using your own set of images*' section below.
+- [2025-04-27] BrainTwins Embedding Explorer now supports creating new LanceDB tables based on your custom set of images. For more information see '*Using your own set of images*' section below.
 
 
 # Use-cases
@@ -96,9 +97,9 @@ For example: `export DB_IMAGE_DIR=./oasis/Images`
 Please note: the OASIS dataset contains highly graphic imagery. Viewer discretion is advised.
 
 # Usage:
-The repository includes two models. One predicts the brain response using Meta's Imagebind as image embedding and the other from Open CLIP image embedding. Both models are hosted on Huggingface. 
+The repository includes two models. One predicts the brain response using Meta's Imagebind as image embedding and the other from Open CLIP image embedding. Both models are hosted on HuggingFace. 
 
-## Download the models from Huggingface
+## Download the models from HuggingFace
 ```{shell}
 cd brain_embedding_model
 python download_models_from_Huggingface.py
@@ -136,8 +137,20 @@ data = calc_brain_embedding(
         image_emb, brain_model_file=BRAIN_EMBEDDING_MAT
 )
 ```
-# Using your own set of images (with the BrainTwins Embedding Explorer)
-Instead of using the provided OASIS database, you can create a new lancedb table based on a set of images of your choice, and explore how your images map onto brain embeddings space.
+
+# Alternative Image Databases for the BrainTwins Embedding Explorer
+The BrainTwins Embedding Explorer does not confine users to the OASIS image set when retrieving emotion-modified images. Alternative image databases are available, such as the public subset of Unsplash including 25K images, or building a custom made database based on a local folder.
+
+## Unsplash database
+To use Unsplash images, first download the lanceDB table mapping Unsplash images onto brain embeddings space from HuggingFace using
+```{shell}
+python ./brainTwins_embedding_explorer/download_unsplash_table_from_huggingface.py
+```
+
+Then, when running the app with `streamlit run ./brainTwins_embedding_explorer/app.py` write *unsplash* under *"Enter table name"* before clicking *Connect to DB*
+
+## Using your own set of images
+Create a new lancedb table based on a set of images of your choice, and explore how your images map onto brain embeddings space.
 
 To do so, first build the lancedb table using
 ```{shell}
@@ -149,11 +162,7 @@ Please note that the provided folder should include at least 256 images.
 
 After this new db is done, to use it, make sure to re-run `export DB_IMAGE_DIR=<images folder path>` with the new folder containing the relevant images
 
-Then, when running the app with 
-```{shell}
-streamlit run ./brainTwins_embedding_explorer/app.py
-```
-Please write the name of your new db under *"Enter table name"* before clicking *Connect to DB*
+Then, when running the app with `streamlit run ./brainTwins_embedding_explorer/app.py` please write the name of your new db under *"Enter table name"* before clicking *Connect to DB*
 
 
 
