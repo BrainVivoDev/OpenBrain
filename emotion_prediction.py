@@ -22,6 +22,8 @@ TRANSFORMATION_TABLE_PATH = "./brain_embedding_model/va_transformation_table.csv
 VALENCE_MODEL_PATH = "./valence_prediction.pickle"
 AROUSAL_MODEL_PATH = "./arousal_prediction.pickle"
 
+MAX_PREDICTED_VALUE = 7
+MIN_PREDICTED_VALUE = 1
 
 def copy_image_to_temp(src_image_path: str) -> str:
     """
@@ -49,6 +51,23 @@ def copy_image_to_temp(src_image_path: str) -> str:
 
     return temp_dir
 
+def scale_values(value: float, min_range: float, max_range: float) -> float:
+    """
+    Scales an input value from the range [min_range, max_range] to the range [-1, 1]
+    to match the valence-arousal space.
+
+    Args:
+        value (float): The value to scale.
+        min_val (float): The minimum value of the original range.
+        max_val (float): The maximum value of the original range.
+    Returns:
+        float: The scaled value.
+    """
+    # the target range is [-1, 1]
+    TARGET_MIN = -1
+    TARGET_MAX = 1
+    return TARGET_MIN + (TARGET_MAX - TARGET_MIN)* ((value - min_range) / (max_range-min_range))
+
 
 def get_closest_emotion(
     valence: float, arousal: float, emotions_df: pd.DataFrame
@@ -65,10 +84,15 @@ def get_closest_emotion(
     """
     best = None
     best_dist = float("inf")
+
+    # Scale valence and arousal to the range [-1, 1]
+    scaled_valence = scale_values(valence, min_range= MIN_PREDICTED_VALUE, max_range= MAX_PREDICTED_VALUE)
+    scaled_arousal = scale_values(arousal, min_range= MIN_PREDICTED_VALUE, max_range= MAX_PREDICTED_VALUE)
+
     for index, row in emotions_df.iterrows():
         # Euclidean distance squared
-        dv = valence - row["Valence"]
-        da = arousal - row["Arousal"]
+        dv = scaled_valence - row["Valence"]
+        da = scaled_arousal - row["Arousal"]
         dist = dv * dv + da * da
         if dist < best_dist:
             best_dist = dist
