@@ -8,32 +8,32 @@
 [![license](https://img.shields.io/badge/license-Apache2.0--CommonsClause-green?logo=style)](https://github.com/BrainVivoDev/OpenBrain/blob/main/LICENSE.txt)
 ![Python 3.10](https://img.shields.io/badge/Python-3.10-blue.svg)
 [![Twitter Follow](https://img.shields.io/twitter/follow/Brainvivio?style=social)](https://twitter.com/Brainvivo)
-[![Join Discord](https://img.shields.io/badge/Join-Discord-7289DA?logo=discord&logoColor=white)](https://discord.gg/QfX4PS79)
+[![Join Discord](https://img.shields.io/badge/Join-Discord-7289DA?logo=discord&logoColor=white)](https://discord.gg/DG7TfFMM)
 
 # Open-Brain
 Open-Brain is trained on functional MRI data to predict the neural activation patterns that images elicit across 1,024 distinct brain regions. These predicted responses serve as image embeddings, sensitively encoding the emotional reactions each image evokes within a specific cohort. For more information please refer to the [project page](https://brainvivodev.github.io/openbrain-brainvivo/).
 
 
 # News 🚀🚀🚀
-- [2025-05-20] BrainTwins Embedding Explorer now integrates the publicly available Unsplash database, giving projects access to an expanded repository of high-quality images. Users can now retrieve output images from Unsplash based on the modified BrainTwins embedding of the uploaded input image. For more info and guidelines, see *Alternative Image Databases* section below.
+- [2025-05-20] BrainTwin™ Embedding Explorer now integrates the publicly available Unsplash database, giving projects access to an expanded repository of high-quality images. Users can now retrieve output images from Unsplash based on the modified BrainTwin™ embedding of the uploaded input image. For more info and guidelines, see *Alternative Image Databases* section below.
 - [2025-05-15] Bug fix in `emotion_prediction.py`: scaling of valence and arousal prediction values was added to match the values in `va_transformation_table`.
 - [2025-05-06] By executing the notebook `open_brain_examples.ipynb` valence and arousal regression models are trained and saved. The models can be used for emotion prediction by calling the function `predict_emotion` in `emotion_prediction.py`. 
 - [2025-04-29] For you convenience, a transformation table mapping known emotions to the VA space is now available at brain_embedding_model/va_transformation_table.csv
-- [2025-04-27] BrainTwins Embedding Explorer now supports creating new LanceDB tables based on your custom set of images. For more information see '*Using your own set of images*' section below.
+- [2025-04-27] BrainTwin™ Embedding Explorer now supports creating new LanceDB tables based on your custom set of images. For more information see '*Using your own set of images*' section below.
 
 
 # Use-cases
 
 - Emotion-Based Image Clustering: Cluster images according to the emotional responses they elicit (see the t‑SNE example in `open_brain_examples.ipynb`).
 
-- Emotional Transformation: Modify an image’s emotional tone by adjusting activations in specific brain regions (see the *BrainTwins Embedding Explorer* below).
+- Emotional Transformation: Modify an image’s emotional tone by adjusting activations in specific brain regions (see the *BrainTwin™ Embedding Explorer* below).
 
 - Video and Image Characterization: Evaluate media content by analyzing the emotions it provokes (see the Perceptor tool below).
 
 
-# BrainTwins Embedding Explorer
+# BrainTwin™ Embedding Explorer
 
-The BrainTwins Embedding Explorer app allows you to freely explore how images map onto brain embeddings. To get started, choose a LanceDB table (the default uses the OASIS dataset, as shown in the first screenshot, although creating a new LanceDB is available via script, see below). Next, upload an image and transform the emotion portrayed in the image by using the emotions slider, then click the “Modify Emotion” button. This transforms the brain embedding accordingly and displays five images from the OASIS dataset that share the most similar brain embedding (see second screenshot). Finally, delve deeper into the brain response by viewing which regions are most responsive and learning about their cognitive roles in perception (see third screenshot). These results can also be downloaded as a CSV file for further analysis.
+The BrainTwin™ Embedding Explorer app allows you to freely explore how images map onto brain embeddings. To get started, choose a LanceDB table (the default uses the OASIS dataset, as shown in the first screenshot, although creating a new LanceDB is available via script, see below). Next, upload an image and transform the emotion portrayed in the image by using the emotions slider, then click the “Modify Emotion” button. This transforms the brain embedding accordingly and displays five images from the OASIS dataset that share the most similar brain embedding (see second screenshot). Finally, delve deeper into the brain response by viewing which regions are most responsive and learning about their cognitive roles in perception (see third screenshot). These results can also be downloaded as a CSV file for further analysis.
 
 <table>
   <tr>
@@ -83,7 +83,7 @@ pip install -r requirements.txt
 ```
 
 3. (Optional) Download the OASIS image dataset dataset  
-This step is optional (the OASIS dataset is required for the BrainTwins Embedding Explorer tool, although using a different image set is enabled, see *Using your own set of images* section below).
+This step is optional (the OASIS dataset is required for the BrainTwin™ Embedding Explorer tool, although using a different image set is enabled, see *Using your own set of images* section below).
 
     1. Download [OASIS](https://www.benedekkurdi.com/#oasis)
 
@@ -138,8 +138,8 @@ data = calc_brain_embedding(
 )
 ```
 
-# Alternative Image Databases for the BrainTwins Embedding Explorer
-The BrainTwins Embedding Explorer does not confine users to the OASIS image set when retrieving emotion-modified images. Alternative image databases are available, such as the public subset of Unsplash including 25K images, or building a custom made database based on a local folder.
+# Alternative Image Databases for the BrainTwin™ Embedding Explorer
+The BrainTwin™ Embedding Explorer does not confine users to the OASIS image set when retrieving emotion-modified images. Alternative image databases are available, such as the public subset of Unsplash including 25K images, or building a custom made database based on a local folder.
 
 ## Unsplash database
 To use Unsplash images, first download the lanceDB table mapping Unsplash images onto brain embeddings space from HuggingFace using
