@@ -64,7 +64,7 @@ loading_placeholder.empty()
 logo_path = project_dir / "graphics" / "OB-Logo.svg"
 # st.image(str(logo_path.resolve()), use_container_width=False)
 st.image(logo_path, use_container_width=False)
-st.title("BrainTwins Embedding Explorer")
+st.title("BrainTwin™ Embedding Explorer")
 
 
 # Initialize keys in session state if they don't exist
